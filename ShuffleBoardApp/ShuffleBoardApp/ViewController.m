@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <FastttCamera.h>
 #import <AFNetworking.h>
+#import "UIImage+Resize.h"
 
 @interface ViewController () <FastttCameraDelegate>
 @property (nonatomic, strong) FastttCamera *fastCamera;
@@ -45,7 +46,8 @@
 didFinishNormalizingCapturedImage:(FastttCapturedImage *)capturedImage
 {
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://ec2-52-53-224-116.us-west-1.compute.amazonaws.com:3000/"]];
-    NSData *imageData = UIImageJPEGRepresentation(capturedImage.fullImage, 1.0);
+    CGSize size = CGSizeMake(512, 512);
+    NSData *imageData = UIImageJPEGRepresentation([capturedImage.fullImage resizedImageToFitInSize:size scaleIfSmaller:YES], 1.0);
     AFHTTPRequestOperation *op = [manager POST:@"upload" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         //do not put image inside parameters dictionary as I did, but append it!
         [formData appendPartWithFileData:imageData name:@"file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
