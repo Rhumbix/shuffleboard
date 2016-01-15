@@ -2,7 +2,7 @@ import os
 import uuid
 import cv2
 import sys
-from flask import Flask, request, redirect, url_for
+from flask import Flask, request, redirect, url_for, send_from_directory
 from werkzeug import secure_filename
 
 UPLOAD_FOLDER = '/tmp'
@@ -53,6 +53,13 @@ def upload():
     </form>
     '''
 
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('static/js', path)
+
+@app.route('/html/<path:path>')
+def send_html(path):
+    return send_from_directory('static/html', path)
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=3000)
