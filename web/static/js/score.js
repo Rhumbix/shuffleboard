@@ -32,8 +32,8 @@ var Score = React.createClass({
             <td> <div> <h2>Blue: {this.state.blue}</h2> </div> </td>
 	  </tr>
 	  <tr>
-	    <td> <img src='/img/red.jpg' /> </td>
-	    <td> <img src='/img/blue.jpg' /> </td>
+	    <td> <img src='{this.state.red_img}' /> </td>
+	    <td> <img src='{this.state.blue_img}' /> </td>
 	  </tr>
 	</tbody>
       </table>

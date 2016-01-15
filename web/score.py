@@ -69,9 +69,9 @@ def get_score(image_file):
   red_img = shuffle_cv.mask_for_red(image_file)
   blue_pucks = shuffle_cv.find_pucks('static' + blue_img)
   red_pucks = shuffle_cv.find_pucks('static' + red_img)
-  score = score(blue_pucks, red_pucks)
-  score.update({'blue_img': blue_img, 'red_img':red_img})
-  return score
+  res = score(blue_pucks, red_pucks)
+  res.update({'blue_img': blue_img, 'red_img':red_img})
+  return res
 
 if __name__ == "__main__":
   print get_score(sys.argv[1])
