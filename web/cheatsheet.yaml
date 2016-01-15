@@ -3,29 +3,29 @@ wall:
   lines:
     -
       left:  
-        x: 2
-        y: 2
-      right:
-        x: 10 
-        y: 2
-    -
-      left:  
-        x: 2
-        y: 10 
-      right:
-        x: 10
-        y: 10
-    -
-      left:  
-        x: 2
-        y: 20
-      right:
-        x: 10
-        y: 20
-    -
-      left:  
-        x: 2
+        x: 0
         y: 40
       right:
-        x: 10 
-        y: 40
+        x: 285
+        y: 42
+    -
+      left:  
+        x: 0
+        y: 127
+      right:
+        x: 286
+        y: 132
+    -
+      left:  
+        x: 3
+        y: 212
+      right:
+        x: 286
+        y: 220
+    -
+      left:  
+        x: 5
+        y: 510
+      right:
+        x: 271
+        y: 509
