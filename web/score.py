@@ -7,7 +7,6 @@ import shuffle_cv
 
 with open('cheatsheet.yaml', 'r') as f:
   params = yaml.load(f)
-  import pdb; pdb.set_trace()
   endzone_at_top = params['endzone_at_top'] == 'y'
 
 def reverse_list(l):
