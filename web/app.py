@@ -1,11 +1,9 @@
 import os
 import uuid
-import cv2
 import sys
 from flask import Flask, request, redirect, url_for, send_from_directory, Response, jsonify
 from werkzeug import secure_filename
 import yaml
-import shuffle_cv
 import score
 
 UPLOAD_FOLDER = '/tmp'
@@ -51,11 +49,7 @@ def upload():
             filename = str(uuid.uuid4()) + secure_filename(file.filename)
             output_file = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(output_file)
-            shuffle_cv.mask_for_blue(output_file)
-            blue_pucks = shuffle_cv.find_pucks('static/img/blue.jpg')
-            open('cheatsheet.yaml', 'r') as f:
-              params = yaml.load(f)
-            res = score.score(params['wall'], blue_pucks, [])
+            res = score.get_score(output_file)
             with open('current_score.yaml', 'w') as f:
               f.write('red: 0\n')
               f.write('blue: %d\n'.format(res))
