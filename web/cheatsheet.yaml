@@ -1,0 +1,31 @@
+wall:
+  endzone_at_top: y
+  lines:
+    -
+      left:  
+        x: 2
+        y: 2
+      right:
+        x: 10 
+        y: 2
+    -
+      left:  
+        x: 2
+        y: 10 
+      right:
+        x: 10
+        y: 10
+    -
+      left:  
+        x: 2
+        y: 20
+      right:
+        x: 10
+        y: 20
+    -
+      left:  
+        x: 2
+        y: 40
+      right:
+        x: 10 
+        y: 40
