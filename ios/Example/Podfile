@@ -5,7 +5,7 @@ xcodeproj 'FastttCamera'
 platform :ios, '7.0'
 
 def install_pods
-  pod "FastttCamera", :path => "../FastttCamera.podspec"
+  pod "FastttCamera"
   pod 'Masonry', '0.6.1'
 end
 
