@@ -2,14 +2,22 @@ import os
 import uuid
 import cv2
 import sys
-from flask import Flask, request, redirect, url_for, send_from_directory
+from flask import Flask, request, redirect, url_for, send_from_directory, Response, jsonify
 from werkzeug import secure_filename
+import yaml
 
 UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+@app.route('/score')
+def get_score():
+    with open('current_score.yaml', 'r') as f:
+	#return Response(f.read(), mimetype='application/json')
+        score = yaml.load(f)
+	return jsonify(**score)
 
 def find_pucks(imagePath):
     cascPath = 'haarcascade_frontalface_default.xml'

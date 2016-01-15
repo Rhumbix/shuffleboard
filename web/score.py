@@ -56,6 +56,6 @@ def score(params, blues, reds):
   return (winner, points)
 
 if __name__ == "__main__":
-  with open('cheatsheet.yaml', 'r') as f:
+  open('cheatsheet.yaml', 'r') as f:
     params = yaml.load(f)
     print score(params['wall'], [[13, 14]], [[5,30]])
