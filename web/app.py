@@ -19,28 +19,6 @@ def get_score():
         score = yaml.load(f)
 	return jsonify(**score)
 
-#def find_pucks(imagePath):
-#    cascPath = 'haarcascade_frontalface_default.xml'
-#    
-#    # Create the haar cascade
-#    faceCascade = cv2.CascadeClassifier(cascPath)
-#    
-#    # Read the image
-#    image = cv2.imread(imagePath)
-#    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-#    
-#    # Detect faces in the image
-#    faces = faceCascade.detectMultiScale(
-#        gray,
-#        scaleFactor=1.1,
-#        minNeighbors=5,
-#        minSize=(30, 30),
-#        flags = cv2.CASCADE_SCALE_IMAGE
-#    )
-#    
-#    print "Found {0} faces!".format(len(faces))
-#    return faces
-
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
@@ -51,8 +29,7 @@ def upload():
             file.save(output_file)
             res = score.get_score(output_file)
             with open('current_score.yaml', 'w') as f:
-              f.write('red: 0\n')
-              f.write('blue: %d\n'.format(res))
+              f.write( yaml.dump(res, default_flow_style=True) )
             return str(res)
     return '''
     <!doctype html>
