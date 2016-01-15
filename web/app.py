@@ -5,6 +5,8 @@ import sys
 from flask import Flask, request, redirect, url_for, send_from_directory, Response, jsonify
 from werkzeug import secure_filename
 import yaml
+import shuffle_cv
+import score
 
 UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -19,27 +21,27 @@ def get_score():
         score = yaml.load(f)
 	return jsonify(**score)
 
-def find_pucks(imagePath):
-    cascPath = 'haarcascade_frontalface_default.xml'
-    
-    # Create the haar cascade
-    faceCascade = cv2.CascadeClassifier(cascPath)
-    
-    # Read the image
-    image = cv2.imread(imagePath)
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    
-    # Detect faces in the image
-    faces = faceCascade.detectMultiScale(
-        gray,
-        scaleFactor=1.1,
-        minNeighbors=5,
-        minSize=(30, 30),
-        flags = cv2.CASCADE_SCALE_IMAGE
-    )
-    
-    print "Found {0} faces!".format(len(faces))
-    return faces
+#def find_pucks(imagePath):
+#    cascPath = 'haarcascade_frontalface_default.xml'
+#    
+#    # Create the haar cascade
+#    faceCascade = cv2.CascadeClassifier(cascPath)
+#    
+#    # Read the image
+#    image = cv2.imread(imagePath)
+#    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+#    
+#    # Detect faces in the image
+#    faces = faceCascade.detectMultiScale(
+#        gray,
+#        scaleFactor=1.1,
+#        minNeighbors=5,
+#        minSize=(30, 30),
+#        flags = cv2.CASCADE_SCALE_IMAGE
+#    )
+#    
+#    print "Found {0} faces!".format(len(faces))
+#    return faces
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -47,9 +49,16 @@ def upload():
         file = request.files['file']
         if file:
             filename = str(uuid.uuid4()) + secure_filename(file.filename)
-	    output_file = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            output_file = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(output_file)
-	    res = find_pucks(output_file)
+            shuffle_cv.mask_for_blue(output_file)
+            blue_pucks = shuffle_cv.find_pucks('static/img/blue.jpg')
+            open('cheatsheet.yaml', 'r') as f:
+              params = yaml.load(f)
+            res = score.score(params['wall'], blue_pucks, [])
+            with open('current_score.yaml', 'w') as f:
+              f.write('red: 0\n')
+              f.write('blue: %d\n'.format(res))
             return str(res)
     return '''
     <!doctype html>

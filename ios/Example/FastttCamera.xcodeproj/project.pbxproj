@@ -217,6 +217,7 @@
 				FAC389901A8928440005EFDD /* Frameworks */,
 				FAC389911A8928440005EFDD /* Resources */,
 				1168D0FD6A65C88D5D995162 /* Copy Pods Resources */,
+				E9312910D5B0D156CE9556DA /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -236,6 +237,7 @@
 				FAC389A91A8928440005EFDD /* Frameworks */,
 				FAC389AA1A8928440005EFDD /* Resources */,
 				1EFFADC47AB10325E84178B2 /* Copy Pods Resources */,
+				779C181436002BED5BB29555 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -350,6 +352,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		779C181436002BED5BB29555 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FastttCameraTests/Pods-FastttCameraTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9312910D5B0D156CE9556DA /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FastttCamera/Pods-FastttCamera-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FE4976FB8F98C95B28CCECC1 /* Check Pods Manifest.lock */ = {

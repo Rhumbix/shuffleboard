@@ -26,11 +26,24 @@
     [self fastttAddChildViewController:self.fastCamera];
     self.fastCamera.view.frame = self.view.frame;
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0f
-                                             target:self
-                                           selector:@selector(capture)
-                                           userInfo:nil
-                                            repeats:YES];
+                                                  target:self
+                                                selector:@selector(capture)
+                                                userInfo:nil
+                                                 repeats:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
