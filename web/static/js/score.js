@@ -25,10 +25,18 @@ var Score = React.createClass({
   },
   render: function() {
     return (
-      <div>
-        <h2>Red: {this.state.red}</h2>
-        <h2>Blue: {this.state.blue}</h2>
-      </div>
+      <table>
+        <tbody>
+	  <tr>
+	    <td> <div> <h2>Red: {this.state.red}</h2> </div> </td>
+            <td> <div> <h2>Blue: {this.state.blue}</h2> </div> </td>
+	  </tr>
+	  <tr>
+	    <td> <img src='/img/red.jpg' /> </td>
+	    <td> <img src='/img/blue.jpg' /> </td>
+	  </tr>
+	</tbody>
+      </table>
     );
   }
 });

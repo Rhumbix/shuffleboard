@@ -8,7 +8,9 @@ def mask_for_blue(image):
     lower_blue = np.array([110,50,50])
     upper_blue = np.array([130,255,255])
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
-    cv2.imwrite('static/img/blue.jpg',mask)
+    filename = '/img/' + str(uuid.uuid4()) + '.jpg'
+    cv2.imwrite('static' + filename,mask)
+    return filename
 
 def mask_for_red(image):
     img = cv2.imread(image)
@@ -16,7 +18,9 @@ def mask_for_red(image):
     lower_red = np.array([165,50,50])
     upper_red = np.array([185,255,255])
     mask = cv2.inRange(hsv, lower_red, upper_red)
-    cv2.imwrite('static/img/red.jpg',mask)
+    filename = '/img/' + str(uuid.uuid4()) + '.jpg'
+    cv2.imwrite('static' + filename,mask)
+    return filename
 
 def find_pucks(mask_file):
     img = cv2.imread(mask_file,0)

@@ -65,11 +65,13 @@ def score(blues, reds):
       return {'red': 0, 'blue': points_for_pucks(blue_pucks, lines)}
 
 def get_score(image_file):
-  shuffle_cv.mask_for_blue(image_file)
-  shuffle_cv.mask_for_red(image_file)
-  blue_pucks = shuffle_cv.find_pucks('static/img/blue.jpg')
-  red_pucks = shuffle_cv.find_pucks('static/img/red.jpg')
-  return score(blue_pucks, red_pucks)
+  blue_img = shuffle_cv.mask_for_blue(image_file)
+  red_img = shuffle_cv.mask_for_red(image_file)
+  blue_pucks = shuffle_cv.find_pucks('static' + blue_img)
+  red_pucks = shuffle_cv.find_pucks('static' + red_img)
+  score = score(blue_pucks, red_pucks)
+  score.update({'blue_img': blue_img, 'red_img':red_img})
+  return score
 
 if __name__ == "__main__":
   print get_score(sys.argv[1])

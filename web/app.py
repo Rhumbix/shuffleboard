@@ -49,6 +49,10 @@ def send_js(path):
 def send_html(path):
     return send_from_directory('static/html', path)
 
+@app.route('/img/<path:path>')
+def send_img(path):
+    return send_from_directory('static/img', path)
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=3000)
 
